@@ -125,6 +125,10 @@ function assertListingPayload(payload: ListingPayload) {
     throw new Error('价格必须是大于 0 的数字。');
   }
 
+  if (payload.currency !== 'CNY') {
+    throw new Error('价格请统一按人民币填写。');
+  }
+
   if (!Number.isInteger(payload.total_slots) || payload.total_slots < 2 || payload.total_slots > 6) {
     throw new Error('总人数必须是 2 到 6 之间的整数。');
   }

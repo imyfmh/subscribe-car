@@ -11,8 +11,8 @@ import { Textarea } from '../ui/textarea';
 const defaultValues: ListingPayload = {
   region: 'US',
   product_type: 'apple_one',
-  price: 5,
-  currency: 'USD',
+  price: 39,
+  currency: 'CNY',
   total_slots: 6,
   available_slots: 3,
   description: '',
@@ -85,7 +85,7 @@ export function ListingForm({
               setValues((current) => ({
                 ...current,
                 region,
-                currency: getRegionMeta(region).currency,
+                currency: 'CNY',
               }));
             }}
           />
@@ -120,11 +120,6 @@ export function ListingForm({
               }))
             }
           />
-        </label>
-
-        <label className="space-y-2">
-          <span className="text-sm font-semibold text-ink">币种</span>
-          <Input value={values.currency} readOnly />
         </label>
 
         <label className="space-y-2">
@@ -166,6 +161,10 @@ export function ListingForm({
         </label>
       </div>
 
+      <div className="rounded-[22px] bg-[#fff8ef] px-4 py-3 text-sm text-ink/70">
+        价格统一按人民币填写，发布人自行换算外区实际成本。
+      </div>
+
       <label className="space-y-2">
         <span className="text-sm font-semibold text-ink">联系方式</span>
         <Input
@@ -205,7 +204,7 @@ export function ListingForm({
       ) : null}
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-ink/60">已启用最小字段校验、敏感词过滤和 1 分钟发布频率限制。</p>
+        <p className="text-sm text-ink/60">请确保价格、车位和联系方式真实有效。</p>
         <Button type="submit" size="lg" disabled={isSubmitting}>
           {isSubmitting ? '提交中...' : submitLabel}
         </Button>

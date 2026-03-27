@@ -20,7 +20,7 @@ export function PublishPage() {
     return (
       <Card className="mx-auto max-w-2xl space-y-4 p-8 text-center">
         <CardTitle>发布前需要先登录</CardTitle>
-        <CardDescription>当前页面已经接入 Supabase Google OAuth，登录后即可发布真实拼车信息。</CardDescription>
+        <CardDescription>登录后即可发布和管理你自己的拼车信息。</CardDescription>
         <div className="flex justify-center">
           <Button onClick={() => void signInWithGoogle()}>Google 登录</Button>
         </div>
@@ -32,9 +32,7 @@ export function PublishPage() {
     <div className="mx-auto max-w-4xl space-y-6">
       <Card className="space-y-3 p-8">
         <CardTitle>发布新的拼车信息</CardTitle>
-        <CardDescription>
-          使用固定枚举字段保证数据质量。提交后会立即出现在首页列表和你的发布页中。
-        </CardDescription>
+        <CardDescription>填写地区、产品、价格、车位和联系方式后即可发布。</CardDescription>
       </Card>
 
       <Card className="p-8">

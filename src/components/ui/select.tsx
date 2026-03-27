@@ -72,7 +72,7 @@ export function Select({
       </button>
 
       {open && !disabled ? (
-        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-[22px] border border-ink/10 bg-white p-2 shadow-float">
+        <div className="absolute z-[120] mt-2 w-full overflow-hidden rounded-[22px] border border-ink/10 bg-white p-2 shadow-float">
           {options.map((option) => {
             const active = option.value === value;
             return (

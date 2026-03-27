@@ -1,8 +1,8 @@
-export type Region = 'US' | 'TR' | 'CN';
+export type Region = 'US' | 'TR' | 'CN' | 'JP' | 'HK';
 
 export type ProductType = 'apple_one' | 'music' | 'icloud';
 
-export type Currency = 'USD' | 'TRY' | 'CNY';
+export type Currency = 'CNY';
 
 export type ListingStatus = 'active' | 'closed';
 
@@ -77,5 +77,4 @@ export interface AuthUser {
   avatarUrl: string | null;
   contact: string;
   rating: number;
-  isDemo?: boolean;
 }

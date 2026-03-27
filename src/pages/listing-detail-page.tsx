@@ -134,12 +134,6 @@ export function ListingDetailPage() {
           </div>
         </Card>
 
-        <Card className="space-y-3 p-6">
-          <CardTitle>风控建议</CardTitle>
-          <CardDescription>
-            建议在 Supabase 后续增加发布次数审计、黑名单词动态配置和举报后台，形成最小可运营闭环。
-          </CardDescription>
-        </Card>
       </div>
     </div>
   );

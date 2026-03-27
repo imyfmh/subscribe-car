@@ -36,7 +36,7 @@ export function ListingFilters({
   ];
 
   return (
-    <div className="grid gap-3 rounded-[30px] border border-white/60 bg-white/80 p-4 shadow-float backdrop-blur lg:grid-cols-[1.4fr_0.9fr_0.9fr_auto]">
+    <div className="relative z-40 grid gap-3 rounded-[30px] border border-white/60 bg-white/80 p-4 shadow-float backdrop-blur lg:grid-cols-[1.4fr_0.9fr_0.9fr_auto]">
       <Input
         value={filters.search ?? ''}
         onChange={(event) => onChange({ ...filters, search: event.target.value })}

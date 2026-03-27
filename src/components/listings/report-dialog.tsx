@@ -21,7 +21,7 @@ export function ReportDialog({ listingId }: ReportDialogProps) {
     try {
       await mutation.mutateAsync({ listing_id: listingId, reason });
       setReason('');
-      setMessage('举报已记录，后续可以在 Supabase 后台审核。');
+      setMessage('举报已提交，我们会尽快处理。');
     } catch (error) {
       setMessage(error instanceof Error ? error.message : '提交失败，请稍后重试。');
     }
