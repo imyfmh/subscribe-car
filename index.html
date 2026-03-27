@@ -15,19 +15,6 @@
     <title>订阅拼车站</title>
     <script type="text/javascript">
       (function (l) {
-        var repoBase = '/subscribe-car';
-        var docsBase = repoBase + '/docs';
-        var isGitHubPages = l.hostname === 'imyfmh.github.io' || /github\.io$/.test(l.hostname);
-
-        if (isGitHubPages && !l.pathname.startsWith(docsBase)) {
-          var suffix = l.pathname.startsWith(repoBase) ? l.pathname.slice(repoBase.length) : l.pathname;
-          var normalizedSuffix = suffix === '/' ? '/' : suffix;
-          l.replace(docsBase + normalizedSuffix + l.search + l.hash);
-        }
-      })(window.location);
-    </script>
-    <script type="text/javascript">
-      (function (l) {
         if (l.search[1] === '/') {
           var decoded = l.search
             .slice(1)

@@ -30,7 +30,7 @@ npm run build
 npm run build:pages
 ```
 
-这会生成可直接用于 GitHub Pages 的 `docs/` 目录，并以 `/subscribe-car/docs/` 作为静态资源前缀。仓库根地址会自动跳转到 `/docs/`。
+这会生成可直接用于 GitHub Pages 的 `docs/` 目录，并以 `/subscribe-car/` 作为静态资源前缀。
 
 ## 环境变量
 
