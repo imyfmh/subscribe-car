@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      (function (l) {
+        var repoBase = '/subscribe-car';
+        var docsBase = repoBase + '/docs';
+        var suffix = l.pathname.startsWith(repoBase) ? l.pathname.slice(repoBase.length) : l.pathname;
+        var normalizedSuffix = suffix === '/' ? '/' : suffix;
+        l.replace(docsBase + normalizedSuffix + l.search + l.hash);
+      })(window.location);
+    </script>
+  </head>
+  <body></body>
+  </html>
