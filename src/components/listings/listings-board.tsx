@@ -14,7 +14,7 @@ export function ListingsBoard({ presetFilters }: ListingsBoardProps) {
   const [filters, setFilters] = useState<ListingFilters>({
     region: presetFilters?.region ?? 'ALL',
     productType: presetFilters?.productType ?? 'ALL',
-    status: 'active',
+    status: 'ALL',
     search: '',
   });
 
@@ -23,14 +23,14 @@ export function ListingsBoard({ presetFilters }: ListingsBoardProps) {
       ...current,
       region: presetFilters?.region ?? current.region ?? 'ALL',
       productType: presetFilters?.productType ?? current.productType ?? 'ALL',
-      status: 'active',
+      status: 'ALL',
     }));
   }, [presetFilters?.productType, presetFilters?.region]);
 
   const mergedFilters: ListingFilters = {
     ...filters,
     ...presetFilters,
-    status: 'active',
+    status: 'ALL',
   };
 
   const { data, isLoading, error } = useListings(mergedFilters);

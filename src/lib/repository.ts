@@ -112,6 +112,16 @@ function applyFilters(listings: Listing[], filters: ListingFilters = {}) {
   });
 }
 
+function sortListings(listings: Listing[]) {
+  return [...listings].sort((left, right) => {
+    if (left.status !== right.status) {
+      return left.status === 'active' ? -1 : 1;
+    }
+
+    return +new Date(right.created_at) - +new Date(left.created_at);
+  });
+}
+
 function assertListingPayload(payload: ListingPayload) {
   if (!REGIONS.some((item) => item.value === payload.region)) {
     throw new Error('区域无效，请使用预设选项。');
@@ -229,9 +239,7 @@ export async function upsertProfile(user: AuthUser) {
 export async function fetchListings(filters: ListingFilters = {}) {
   if (!isSupabaseConfigured || !supabase) {
     const db = readLocalDb();
-    const listings = attachListingProfiles(db.listings, db.profiles).sort(
-      (left, right) => +new Date(right.created_at) - +new Date(left.created_at),
-    );
+    const listings = sortListings(attachListingProfiles(db.listings, db.profiles));
     return applyFilters(listings, filters);
   }
 
@@ -264,7 +272,7 @@ export async function fetchListings(filters: ListingFilters = {}) {
     throw new Error(profilesError.message);
   }
 
-  return applyFilters(attachListingProfiles(listings, (profilesData ?? []) as Profile[]), filters);
+  return sortListings(applyFilters(attachListingProfiles(listings, (profilesData ?? []) as Profile[]), filters));
 }
 
 export async function fetchListingById(listingId: string) {
