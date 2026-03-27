@@ -5,14 +5,13 @@ import { ReportDialog } from '../components/listings/report-dialog';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardDescription, CardTitle } from '../components/ui/card';
-import { useComments, useListing } from '../hooks/useMarketplace';
+import { useListing } from '../hooks/useMarketplace';
 import { formatCurrency, formatDateTime, getProductMeta, getRegionMeta } from '../lib/utils';
 
 export function ListingDetailPage() {
   const params = useParams();
   const listingId = params.listingId;
   const listingQuery = useListing(listingId);
-  const commentsQuery = useComments(listingId);
 
   useEffect(() => {
     document.title = '订阅拼车站 | 详情';
@@ -95,33 +94,11 @@ export function ListingDetailPage() {
           <CardTitle>拼车说明</CardTitle>
           <p className="text-base leading-8 text-ink/75">{listing.description}</p>
         </div>
-
-        <div className="space-y-4">
-          <CardTitle>评论区</CardTitle>
-          {commentsQuery.data?.length ? (
-            <div className="space-y-3">
-              {commentsQuery.data.map((comment) => (
-                <div key={comment.id} className="rounded-[24px] border border-ink/8 bg-white p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="font-semibold text-ink">{comment.profile?.nickname ?? '匿名用户'}</div>
-                    <div className="text-xs text-ink/45">{formatDateTime(comment.created_at)}</div>
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-ink/70">{comment.content}</p>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <CardDescription>暂无评论。该区域已经预留好数据结构和查询逻辑。</CardDescription>
-          )}
-        </div>
       </Card>
 
       <div className="space-y-6">
         <Card className="space-y-4 p-6">
           <CardTitle>联系发布者</CardTitle>
-          <CardDescription>
-            如果后续做私信系统，可以把这里替换成站内消息，避免联系方式直接暴露。
-          </CardDescription>
           <div className="rounded-[24px] bg-mist p-4">
             <div className="text-sm text-ink/55">联系人</div>
             <div className="mt-1 text-lg font-semibold text-ink">{listing.profile?.nickname}</div>
