@@ -9,9 +9,9 @@ export function HomePage() {
 
   return (
     <ListingsBoard
-      eyebrow="MVP 首页"
+      eyebrow="首页"
       title="把 Apple One、Music、iCloud 的车位，做成更干净的公开市场。"
-      subtitle="支持浏览、发布、筛选、Google 登录和 GitHub Pages 部署。未接入 Supabase 时自动使用本地演示数据，便于先完成前端联调。"
+      subtitle="支持浏览、发布、筛选、Google 登录和 GitHub Pages 部署，面向真实 Supabase 数据源。"
     />
   );
 }

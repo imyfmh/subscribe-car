@@ -13,7 +13,7 @@ const navItems = [
 ];
 
 export function AppShell({ children }: { children: ReactNode }) {
-  const { user, signInWithGoogle, signOut, mode } = useAuth();
+  const { user, signInWithGoogle, signOut } = useAuth();
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-aura text-ink">
@@ -25,9 +25,6 @@ export function AppShell({ children }: { children: ReactNode }) {
               <Link to="/" className="font-display text-xl font-bold tracking-tight">
                 {APP_NAME}
               </Link>
-              <span className="rounded-full bg-peach/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-peach">
-                MVP
-              </span>
             </div>
             <nav className="flex flex-wrap items-center gap-2">
               {navItems.map((item) => (
@@ -47,11 +44,6 @@ export function AppShell({ children }: { children: ReactNode }) {
               ))}
             </nav>
             <div className="flex items-center justify-between gap-3 lg:justify-end">
-              {mode === 'demo' ? (
-                <span className="rounded-full bg-gold/20 px-3 py-1 text-xs font-semibold text-ink/70">
-                  Demo 模式
-                </span>
-              ) : null}
               {user ? (
                 <div className="flex items-center gap-3">
                   <div className="hidden text-right sm:block">
@@ -74,9 +66,6 @@ export function AppShell({ children }: { children: ReactNode }) {
           </div>
         </header>
         <main className="flex-1 pt-8">{children}</main>
-        <footer className="mt-12 border-t border-ink/10 py-6 text-sm text-ink/60">
-          基于 React、Tailwind、Supabase 构建，可部署至 GitHub Pages。
-        </footer>
       </div>
     </div>
   );

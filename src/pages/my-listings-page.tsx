@@ -24,7 +24,7 @@ function toPayload(listing: Listing) {
 }
 
 export function MyListingsPage() {
-  const { user, signInWithGoogle, mode } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
   const [editingListing, setEditingListing] = useState<Listing | null>(null);
   const myListingsQuery = useMyListings(user?.id);
   const updateMutation = useUpdateListing(user);
@@ -42,9 +42,7 @@ export function MyListingsPage() {
           当前页面包含“编辑 / 删除”操作，和需求文档中的“我的发布”完全对应。
         </CardDescription>
         <div className="flex justify-center">
-          <Button onClick={() => void signInWithGoogle()}>
-            {mode === 'demo' ? '进入 Demo 登录' : 'Google 登录'}
-          </Button>
+          <Button onClick={() => void signInWithGoogle()}>Google 登录</Button>
         </div>
       </Card>
     );

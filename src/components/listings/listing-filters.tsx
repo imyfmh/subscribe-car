@@ -2,7 +2,7 @@ import { PRODUCTS, REGIONS } from '../../lib/constants';
 import type { ListingFilters } from '../../lib/types';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { Select } from '../ui/select';
+import { Select, type SelectOption } from '../ui/select';
 
 interface ListingFiltersProps {
   filters: ListingFilters;
@@ -17,6 +17,24 @@ export function ListingFilters({
   disabledRegion = false,
   disabledProduct = false,
 }: ListingFiltersProps) {
+  const regionOptions: SelectOption[] = [
+    { value: 'ALL', label: '全部区域' },
+    ...REGIONS.map((item) => ({
+      value: item.value,
+      label: item.label,
+      description: item.description,
+    })),
+  ];
+
+  const productOptions: SelectOption[] = [
+    { value: 'ALL', label: '全部产品' },
+    ...PRODUCTS.map((item) => ({
+      value: item.value,
+      label: item.label,
+      description: item.description,
+    })),
+  ];
+
   return (
     <div className="grid gap-3 rounded-[30px] border border-white/60 bg-white/80 p-4 shadow-float backdrop-blur lg:grid-cols-[1.4fr_0.9fr_0.9fr_auto]">
       <Input
@@ -26,38 +44,26 @@ export function ListingFilters({
       />
       <Select
         value={filters.region ?? 'ALL'}
+        options={regionOptions}
         disabled={disabledRegion}
-        onChange={(event) =>
+        onChange={(value) =>
           onChange({
             ...filters,
-            region: event.target.value as ListingFilters['region'],
+            region: value as ListingFilters['region'],
           })
         }
-      >
-        <option value="ALL">全部区域</option>
-        {REGIONS.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))}
-      </Select>
+      />
       <Select
         value={filters.productType ?? 'ALL'}
+        options={productOptions}
         disabled={disabledProduct}
-        onChange={(event) =>
+        onChange={(value) =>
           onChange({
             ...filters,
-            productType: event.target.value as ListingFilters['productType'],
+            productType: value as ListingFilters['productType'],
           })
         }
-      >
-        <option value="ALL">全部产品</option>
-        {PRODUCTS.map((item) => (
-          <option key={item.value} value={item.value}>
-            {item.label}
-          </option>
-        ))}
-      </Select>
+      />
       <Button
         variant="ghost"
         onClick={() =>

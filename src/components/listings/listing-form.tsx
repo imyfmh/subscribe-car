@@ -5,7 +5,7 @@ import type { ListingPayload } from '../../lib/types';
 import { getRegionMeta } from '../../lib/utils';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { Select } from '../ui/select';
+import { Select, type SelectOption } from '../ui/select';
 import { Textarea } from '../ui/textarea';
 
 const defaultValues: ListingPayload = {
@@ -42,6 +42,24 @@ export function ListingForm({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const regionMeta = useMemo(() => getRegionMeta(values.region), [values.region]);
+  const regionOptions = useMemo<SelectOption[]>(
+    () =>
+      REGIONS.map((item) => ({
+        value: item.value,
+        label: item.label,
+        description: item.description,
+      })),
+    [],
+  );
+  const productOptions = useMemo<SelectOption[]>(
+    () =>
+      PRODUCTS.map((item) => ({
+        value: item.value,
+        label: item.label,
+        description: item.description,
+      })),
+    [],
+  );
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -61,21 +79,16 @@ export function ListingForm({
           <span className="text-sm font-semibold text-ink">区域</span>
           <Select
             value={values.region}
-            onChange={(event) => {
-              const region = event.target.value as ListingPayload['region'];
+            options={regionOptions}
+            onChange={(value) => {
+              const region = value as ListingPayload['region'];
               setValues((current) => ({
                 ...current,
                 region,
                 currency: getRegionMeta(region).currency,
               }));
             }}
-          >
-            {REGIONS.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </Select>
+          />
           <p className="text-xs text-ink/55">{regionMeta.description}</p>
         </label>
 
@@ -83,19 +96,14 @@ export function ListingForm({
           <span className="text-sm font-semibold text-ink">产品类型</span>
           <Select
             value={values.product_type}
-            onChange={(event) =>
+            options={productOptions}
+            onChange={(value) =>
               setValues((current) => ({
                 ...current,
-                product_type: event.target.value as ListingPayload['product_type'],
+                product_type: value as ListingPayload['product_type'],
               }))
             }
-          >
-            {PRODUCTS.map((item) => (
-              <option key={item.value} value={item.value}>
-                {item.label}
-              </option>
-            ))}
-          </Select>
+          />
         </label>
 
         <label className="space-y-2">

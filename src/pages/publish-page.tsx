@@ -9,7 +9,7 @@ import { Button } from '../components/ui/button';
 
 export function PublishPage() {
   const navigate = useNavigate();
-  const { user, signInWithGoogle, mode } = useAuth();
+  const { user, signInWithGoogle } = useAuth();
   const createMutation = useCreateListing(user);
 
   useEffect(() => {
@@ -20,13 +20,9 @@ export function PublishPage() {
     return (
       <Card className="mx-auto max-w-2xl space-y-4 p-8 text-center">
         <CardTitle>发布前需要先登录</CardTitle>
-        <CardDescription>
-          文档要求 Google 登录。当前页面已经接入 Google OAuth；如果还没配置 Supabase，则先进入 demo 登录体验完整提交流程。
-        </CardDescription>
+        <CardDescription>当前页面已经接入 Supabase Google OAuth，登录后即可发布真实拼车信息。</CardDescription>
         <div className="flex justify-center">
-          <Button onClick={() => void signInWithGoogle()}>
-            {mode === 'demo' ? '进入 Demo 登录' : 'Google 登录'}
-          </Button>
+          <Button onClick={() => void signInWithGoogle()}>Google 登录</Button>
         </div>
       </Card>
     );

@@ -8,37 +8,18 @@ import {
   type PropsWithChildren,
 } from 'react';
 
-import { mockProfiles } from '../lib/mock-data';
 import { upsertProfile } from '../lib/repository';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
 import type { AuthUser } from '../lib/types';
 
-const DEMO_SESSION_KEY = 'subscribe-car:demo-session';
-
-type AuthMode = 'supabase' | 'demo';
-
 interface AuthContextValue {
   user: AuthUser | null;
-  mode: AuthMode;
   loading: boolean;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
-
-function createDemoUser(): AuthUser {
-  const profile = mockProfiles[0];
-  return {
-    id: profile.id,
-    email: 'demo@subscribe.car',
-    nickname: profile.nickname,
-    avatarUrl: profile.avatar_url,
-    contact: profile.contact,
-    rating: profile.rating,
-    isDemo: true,
-  };
-}
 
 function mapSupabaseUser(user: {
   id: string;
@@ -75,10 +56,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   useEffect(() => {
     if (!isSupabaseConfigured || !supabase) {
-      const rawSession = window.localStorage.getItem(DEMO_SESSION_KEY);
-      if (rawSession) {
-        setUser(JSON.parse(rawSession) as AuthUser);
-      }
+      setUser(null);
       setLoading(false);
       return;
     }
@@ -127,10 +105,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const signInWithGoogle = useCallback(async () => {
     if (!isSupabaseConfigured || !supabase) {
-      const demoUser = createDemoUser();
-      window.localStorage.setItem(DEMO_SESSION_KEY, JSON.stringify(demoUser));
-      setUser(demoUser);
-      return;
+      throw new Error('Supabase 尚未配置完成。');
     }
 
     const client = supabase;
@@ -147,7 +122,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const signOut = useCallback(async () => {
     if (!isSupabaseConfigured || !supabase) {
-      window.localStorage.removeItem(DEMO_SESSION_KEY);
       setUser(null);
       return;
     }
@@ -164,7 +138,6 @@ export function AuthProvider({ children }: PropsWithChildren) {
   const value = useMemo<AuthContextValue>(
     () => ({
       user,
-      mode: isSupabaseConfigured ? 'supabase' : 'demo',
       loading,
       signInWithGoogle,
       signOut,

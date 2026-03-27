@@ -78,11 +78,11 @@ export function ListingsBoard({
 
   return (
     <section className="space-y-8">
-      <Card className="overflow-hidden border-none bg-ink p-0 text-white shadow-[0_32px_80px_rgba(21,33,50,0.25)]">
+      <Card className="overflow-hidden !border-none !bg-[linear-gradient(135deg,#142130_0%,#1d3551_48%,#2c7567_100%)] p-0 !text-white shadow-[0_32px_80px_rgba(21,33,50,0.25)]">
         <div className="grid gap-8 p-8 lg:grid-cols-[1.35fr_0.85fr] lg:p-10">
           <div className="space-y-6">
             <div className="space-y-4">
-              <Badge className="bg-white/12 text-white">{eyebrow}</Badge>
+              <Badge className="bg-white/12 !text-white">{eyebrow}</Badge>
               <div className="space-y-4">
                 <h1 className="font-display text-4xl font-bold leading-tight sm:text-5xl">{title}</h1>
                 <p className="max-w-2xl text-base leading-7 text-white/75 sm:text-lg">{subtitle}</p>
@@ -103,19 +103,19 @@ export function ListingsBoard({
           </div>
 
           <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-            <Card className="border-white/10 bg-white/10 text-white shadow-none">
-              <CardDescription className="text-white/55">当前筛选</CardDescription>
-              <CardTitle className="mt-2 text-white">
+            <Card className="!border-white/10 !bg-white/12 !text-white shadow-none">
+              <CardDescription className="!text-white/55">当前筛选</CardDescription>
+              <CardTitle className="mt-2 !text-white">
                 {productLabel} · {regionLabel}
               </CardTitle>
             </Card>
-            <Card className="border-white/10 bg-white/10 text-white shadow-none">
-              <CardDescription className="text-white/55">活跃车位</CardDescription>
-              <CardTitle className="mt-2 text-white">{stats.total}</CardTitle>
+            <Card className="!border-white/10 !bg-white/12 !text-white shadow-none">
+              <CardDescription className="!text-white/55">活跃车位</CardDescription>
+              <CardTitle className="mt-2 !text-white">{stats.total}</CardTitle>
             </Card>
-            <Card className="border-white/10 bg-white/10 text-white shadow-none">
-              <CardDescription className="text-white/55">可加入席位</CardDescription>
-              <CardTitle className="mt-2 text-white">{stats.seats}</CardTitle>
+            <Card className="!border-white/10 !bg-white/12 !text-white shadow-none">
+              <CardDescription className="!text-white/55">可加入席位</CardDescription>
+              <CardTitle className="mt-2 !text-white">{stats.seats}</CardTitle>
             </Card>
           </div>
         </div>
@@ -155,27 +155,6 @@ export function ListingsBoard({
           </CardDescription>
         </Card>
       )}
-
-      <div className="grid gap-5 lg:grid-cols-3">
-        <Card className="bg-[#fffaf2]">
-          <CardTitle>数据质量约束</CardTitle>
-          <CardDescription className="mt-2">
-            区域和产品类型都使用下拉选择，价格只能输入数字，避免自由文本污染数据。
-          </CardDescription>
-        </Card>
-        <Card className="bg-[#f4fbf7]">
-          <CardTitle>防 spam</CardTitle>
-          <CardDescription className="mt-2">
-            发布频率限制为 1 分钟 1 条，并内置最小字段校验与黑名单词过滤。
-          </CardDescription>
-        </Card>
-        <Card className="bg-[#fff6f0]">
-          <CardTitle>部署路径</CardTitle>
-          <CardDescription className="mt-2">
-            已预留 GitHub Pages 404 回退，支持类似 `/apple-one-us` 的落地页路径。
-          </CardDescription>
-        </Card>
-      </div>
     </section>
   );
 }
